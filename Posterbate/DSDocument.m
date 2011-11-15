@@ -10,6 +10,8 @@
 
 @implementation DSDocument
 
+@synthesize halftoneView;
+
 - (id)init
 {
     self = [super init];
@@ -59,6 +61,11 @@
 + (BOOL)autosavesInPlace
 {
     return YES;
+}
+
+- (void)printDocument:(id)sender
+{
+    [halftoneView print:sender];
 }
 
 @end

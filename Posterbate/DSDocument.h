@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "DSHalftonePrintView.h"
+
 @interface DSDocument : NSDocument
+
+@property (retain) IBOutlet DSHalftonePrintView *halftoneView;
 
 @end

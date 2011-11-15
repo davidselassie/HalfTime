@@ -14,6 +14,8 @@
 		A1E5EB1F147245CE005C0151 /* DSDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E5EB1E147245CE005C0151 /* DSDocument.m */; };
 		A1E5EB22147245CE005C0151 /* DSDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1E5EB20147245CE005C0151 /* DSDocument.xib */; };
 		A1E5EB25147245CF005C0151 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1E5EB23147245CF005C0151 /* MainMenu.xib */; };
+		A1E5EB2E14724851005C0151 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E5EB2D14724851005C0151 /* Quartz.framework */; };
+		A1E5EB3114724934005C0151 /* DSHalftonePrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E5EB3014724934005C0151 /* DSHalftonePrintView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,15 +24,18 @@
 		A1E5EB0E147245CE005C0151 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		A1E5EB0F147245CE005C0151 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A1E5EB10147245CE005C0151 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		A1E5EB13147245CE005C0151 /* Posterbate-Info.plist */ = {isa = PBXFileReference; path = "Posterbate-Info.plist"; sourceTree = "<group>"; };
+		A1E5EB13147245CE005C0151 /* Posterbate-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Posterbate-Info.plist"; sourceTree = "<group>"; };
 		A1E5EB15147245CE005C0151 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A1E5EB17147245CE005C0151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A1E5EB19147245CE005C0151 /* Posterbate-Prefix.pch */ = {isa = PBXFileReference; path = "Posterbate-Prefix.pch"; sourceTree = "<group>"; };
+		A1E5EB19147245CE005C0151 /* Posterbate-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Posterbate-Prefix.pch"; sourceTree = "<group>"; };
 		A1E5EB1B147245CE005C0151 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		A1E5EB1D147245CE005C0151 /* DSDocument.h */ = {isa = PBXFileReference; path = DSDocument.h; sourceTree = "<group>"; };
+		A1E5EB1D147245CE005C0151 /* DSDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSDocument.h; sourceTree = "<group>"; };
 		A1E5EB1E147245CE005C0151 /* DSDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSDocument.m; sourceTree = "<group>"; };
 		A1E5EB21147245CE005C0151 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DSDocument.xib; sourceTree = "<group>"; };
 		A1E5EB24147245CF005C0151 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A1E5EB2D14724851005C0151 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		A1E5EB2F14724934005C0151 /* DSHalftonePrintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSHalftonePrintView.h; sourceTree = "<group>"; };
+		A1E5EB3014724934005C0151 /* DSHalftonePrintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSHalftonePrintView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +44,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1E5EB0C147245CE005C0151 /* Cocoa.framework in Frameworks */,
+				A1E5EB2E14724851005C0151 /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +71,7 @@
 		A1E5EB0A147245CE005C0151 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1E5EB2D14724851005C0151 /* Quartz.framework */,
 				A1E5EB0B147245CE005C0151 /* Cocoa.framework */,
 				A1E5EB0D147245CE005C0151 /* Other Frameworks */,
 			);
@@ -84,6 +91,8 @@
 		A1E5EB11147245CE005C0151 /* Posterbate */ = {
 			isa = PBXGroup;
 			children = (
+				A1E5EB2F14724934005C0151 /* DSHalftonePrintView.h */,
+				A1E5EB3014724934005C0151 /* DSHalftonePrintView.m */,
 				A1E5EB1D147245CE005C0151 /* DSDocument.h */,
 				A1E5EB1E147245CE005C0151 /* DSDocument.m */,
 				A1E5EB20147245CE005C0151 /* DSDocument.xib */,
@@ -171,6 +180,7 @@
 			files = (
 				A1E5EB18147245CE005C0151 /* main.m in Sources */,
 				A1E5EB1F147245CE005C0151 /* DSDocument.m in Sources */,
+				A1E5EB3114724934005C0151 /* DSHalftonePrintView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
