@@ -1,0 +1,307 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1E5EB0C147245CE005C0151 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E5EB0B147245CE005C0151 /* Cocoa.framework */; };
+		A1E5EB16147245CE005C0151 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1E5EB14147245CE005C0151 /* InfoPlist.strings */; };
+		A1E5EB18147245CE005C0151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E5EB17147245CE005C0151 /* main.m */; };
+		A1E5EB1C147245CE005C0151 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A1E5EB1A147245CE005C0151 /* Credits.rtf */; };
+		A1E5EB1F147245CE005C0151 /* DSDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E5EB1E147245CE005C0151 /* DSDocument.m */; };
+		A1E5EB22147245CE005C0151 /* DSDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1E5EB20147245CE005C0151 /* DSDocument.xib */; };
+		A1E5EB25147245CF005C0151 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1E5EB23147245CF005C0151 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A1E5EB07147245CE005C0151 /* Posterbate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posterbate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1E5EB0B147245CE005C0151 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		A1E5EB0E147245CE005C0151 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A1E5EB0F147245CE005C0151 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A1E5EB10147245CE005C0151 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A1E5EB13147245CE005C0151 /* Posterbate-Info.plist */ = {isa = PBXFileReference; path = "Posterbate-Info.plist"; sourceTree = "<group>"; };
+		A1E5EB15147245CE005C0151 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A1E5EB17147245CE005C0151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A1E5EB19147245CE005C0151 /* Posterbate-Prefix.pch */ = {isa = PBXFileReference; path = "Posterbate-Prefix.pch"; sourceTree = "<group>"; };
+		A1E5EB1B147245CE005C0151 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		A1E5EB1D147245CE005C0151 /* DSDocument.h */ = {isa = PBXFileReference; path = DSDocument.h; sourceTree = "<group>"; };
+		A1E5EB1E147245CE005C0151 /* DSDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSDocument.m; sourceTree = "<group>"; };
+		A1E5EB21147245CE005C0151 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DSDocument.xib; sourceTree = "<group>"; };
+		A1E5EB24147245CF005C0151 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1E5EB04147245CE005C0151 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1E5EB0C147245CE005C0151 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1E5EAFC147245CE005C0151 = {
+			isa = PBXGroup;
+			children = (
+				A1E5EB11147245CE005C0151 /* Posterbate */,
+				A1E5EB0A147245CE005C0151 /* Frameworks */,
+				A1E5EB08147245CE005C0151 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1E5EB08147245CE005C0151 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1E5EB07147245CE005C0151 /* Posterbate.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1E5EB0A147245CE005C0151 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1E5EB0B147245CE005C0151 /* Cocoa.framework */,
+				A1E5EB0D147245CE005C0151 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A1E5EB0D147245CE005C0151 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1E5EB0E147245CE005C0151 /* AppKit.framework */,
+				A1E5EB0F147245CE005C0151 /* CoreData.framework */,
+				A1E5EB10147245CE005C0151 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		A1E5EB11147245CE005C0151 /* Posterbate */ = {
+			isa = PBXGroup;
+			children = (
+				A1E5EB1D147245CE005C0151 /* DSDocument.h */,
+				A1E5EB1E147245CE005C0151 /* DSDocument.m */,
+				A1E5EB20147245CE005C0151 /* DSDocument.xib */,
+				A1E5EB23147245CF005C0151 /* MainMenu.xib */,
+				A1E5EB12147245CE005C0151 /* Supporting Files */,
+			);
+			path = Posterbate;
+			sourceTree = "<group>";
+		};
+		A1E5EB12147245CE005C0151 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A1E5EB13147245CE005C0151 /* Posterbate-Info.plist */,
+				A1E5EB14147245CE005C0151 /* InfoPlist.strings */,
+				A1E5EB17147245CE005C0151 /* main.m */,
+				A1E5EB19147245CE005C0151 /* Posterbate-Prefix.pch */,
+				A1E5EB1A147245CE005C0151 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1E5EB06147245CE005C0151 /* Posterbate */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1E5EB28147245CF005C0151 /* Build configuration list for PBXNativeTarget "Posterbate" */;
+			buildPhases = (
+				A1E5EB03147245CE005C0151 /* Sources */,
+				A1E5EB04147245CE005C0151 /* Frameworks */,
+				A1E5EB05147245CE005C0151 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Posterbate;
+			productName = Posterbate;
+			productReference = A1E5EB07147245CE005C0151 /* Posterbate.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1E5EAFE147245CE005C0151 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = A1E5EB01147245CE005C0151 /* Build configuration list for PBXProject "Posterbate" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A1E5EAFC147245CE005C0151;
+			productRefGroup = A1E5EB08147245CE005C0151 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1E5EB06147245CE005C0151 /* Posterbate */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1E5EB05147245CE005C0151 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1E5EB16147245CE005C0151 /* InfoPlist.strings in Resources */,
+				A1E5EB1C147245CE005C0151 /* Credits.rtf in Resources */,
+				A1E5EB22147245CE005C0151 /* DSDocument.xib in Resources */,
+				A1E5EB25147245CF005C0151 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1E5EB03147245CE005C0151 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1E5EB18147245CE005C0151 /* main.m in Sources */,
+				A1E5EB1F147245CE005C0151 /* DSDocument.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A1E5EB14147245CE005C0151 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1E5EB15147245CE005C0151 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A1E5EB1A147245CE005C0151 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1E5EB1B147245CE005C0151 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		A1E5EB20147245CE005C0151 /* DSDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1E5EB21147245CE005C0151 /* en */,
+			);
+			name = DSDocument.xib;
+			sourceTree = "<group>";
+		};
+		A1E5EB23147245CF005C0151 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1E5EB24147245CF005C0151 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A1E5EB26147245CF005C0151 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A1E5EB27147245CF005C0151 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A1E5EB29147245CF005C0151 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Posterbate/Posterbate-Prefix.pch";
+				INFOPLIST_FILE = "Posterbate/Posterbate-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A1E5EB2A147245CF005C0151 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Posterbate/Posterbate-Prefix.pch";
+				INFOPLIST_FILE = "Posterbate/Posterbate-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1E5EB01147245CE005C0151 /* Build configuration list for PBXProject "Posterbate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1E5EB26147245CF005C0151 /* Debug */,
+				A1E5EB27147245CF005C0151 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1E5EB28147245CF005C0151 /* Build configuration list for PBXNativeTarget "Posterbate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1E5EB29147245CF005C0151 /* Debug */,
+				A1E5EB2A147245CF005C0151 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A1E5EAFE147245CE005C0151 /* Project object */;
+}
