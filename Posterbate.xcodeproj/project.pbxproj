@@ -310,6 +310,7 @@
 				A1E5EB2A147245CF005C0151 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

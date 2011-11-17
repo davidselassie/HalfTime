@@ -38,16 +38,16 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
 
 - (NSInteger)pagesHigh
 {
-    return ceil(self.bounds.size.height / self.pageSize.height);
+    return ceil(self.bounds.size.height / self.paperSize.height);
 }
 
 - (NSInteger)pagesWide
 {
-    return ceil(self.bounds.size.width / self.pageSize.width);
+    return ceil(self.bounds.size.width / self.paperSize.width);
 }
 
 @synthesize pixelatedImageRep;
-@synthesize pageSize;
+@synthesize paperSize;
 @synthesize dotSize;
 @synthesize labelAttributes;
 
@@ -59,22 +59,25 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
 - (void)setImage:(NSImage *)newImage
 {
     [super setImage:newImage];
-    self.window.contentAspectRatio = newImage.size;
     
-    NSRect newFrame = self.window.frame;
-    newFrame.size = newImage.size;
-    [self.window setFrame:newFrame display:TRUE animate:TRUE];
+    if (self.image) {
+        self.window.contentAspectRatio = self.image.size;
+        
+        NSRect newFrame = self.window.frame;
+        newFrame.size = self.image.size;
+        [self.window setFrame:newFrame display:TRUE animate:TRUE];
+    }
 }
 
 - (id)initWithFrame:(NSRect)frameRect
 {
     if (self = [super initWithFrame:frameRect]) {
-        [self addObserver:self forKeyPath:@"pageSize" options:NSKeyValueObservingOptionNew context:nil];
-        
-        self.pageSize = NSMakeSize(85 * 2, 110 * 2);
-        self.dotSize = 5.0;
         self.labelAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica Neue" size:36], NSFontAttributeName, [NSColor grayColor], NSForegroundColorAttributeName, nil];
         
+        [self addObserver:self forKeyPath:@"dotSize" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
+        [self addObserver:self forKeyPath:@"paperSize" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
+                
+        [self scaleUnitSquareToSize:NSMakeSize(0.5, 0.5)];
         //[NSBezierPath setDefaultFlatness:100.0];
     }
     
@@ -98,7 +101,7 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
     NSInteger pageAcross = page % self.pagesWide;
     NSInteger pageDown = page / self.pagesWide;
     
-    return NSMakeRect(pageAcross * pageSize.width, pageDown * pageSize.height, pageSize.width, pageSize.height);
+    return NSMakeRect(pageAcross * paperSize.width, pageDown * paperSize.height, paperSize.width, paperSize.height);
 }
 
 - (void)setFrameSize:(NSSize)newSize
@@ -106,15 +109,20 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
     // Has to be called first, otherwise strange lag times.
     [super setFrameSize:newSize];
     
-    // This contains a scaled down (or up) version of the image where each dot in the halftone print is one pixel in this image.
-    NSImage *pixeledImage = [[NSImage alloc] initWithSize:NSMakeSize(self.bounds.size.width / dotSize, self.bounds.size.height / dotSize)];
-    
-    [pixeledImage lockFocus];
-    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-    [self.image drawInRect:NSMakeZeroRectFromSize(pixeledImage.size) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
-    [pixeledImage unlockFocus];
-    
-    self.pixelatedImageRep = [[NSBitmapImageRep alloc] initWithData:[pixeledImage TIFFRepresentation]];
+    if (self.image) {
+        // This contains a scaled down (or up) version of the image where each dot in the halftone print is one pixel in this image.
+        NSImage *pixelatedImage = [[NSImage alloc] initWithSize:NSMakeSize(self.bounds.size.width / dotSize, self.bounds.size.height / dotSize)];
+        
+        [pixelatedImage lockFocus];
+        [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+        [self.image drawInRect:NSMakeZeroRectFromSize(pixelatedImage.size) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+        [pixelatedImage unlockFocus];
+        
+        self.pixelatedImageRep = [[NSBitmapImageRep alloc] initWithData:[pixelatedImage TIFFRepresentation]];
+    }
+    else {
+        self.pixelatedImageRep = nil;
+    }
 }
 
 - (void)viewDidEndLiveResize
@@ -127,7 +135,7 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    if (self.image) {
+    if (self.pixelatedImageRep) {
         // Raw image scaling:
         //[self.image drawInRect:self.bounds fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
         
@@ -179,7 +187,7 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
         [[NSColor grayColor] set];
         for (NSInteger xPage = 0; xPage < self.pagesWide; xPage++) {
             for (NSInteger yPage = 0; yPage < self.pagesHigh; yPage++) {
-                NSRect pageRect = NSMakeRect(xPage * pageSize.width, yPage * pageSize.height, pageSize.width, pageSize.height);
+                NSRect pageRect = NSMakeRect(xPage * paperSize.width, yPage * paperSize.height, paperSize.width, paperSize.height);
 
                 if (NSIntersectsRect(dirtyRect, pageRect)) {
                     NSFrameRect(pageRect);
@@ -231,15 +239,11 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
 {
     
 }
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (object == self && [keyPath isEqualToString:@"pageSize"]) {
-        NSSize withMarginsPaperSize = pageSize;
-        
-        withMarginsPaperSize.width += 10;
-        withMarginsPaperSize.height += 10;
-        
-        [NSPrintInfo sharedPrintInfo].paperSize = withMarginsPaperSize;
+    if (object == self) {
+        [self setNeedsDisplay];
     }
 }
 

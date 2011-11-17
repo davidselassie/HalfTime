@@ -13,7 +13,7 @@
 @property (retain) NSBitmapImageRep *pixelatedImageRep;
 @property (readonly) NSInteger pagesHigh;
 @property (readonly) NSInteger pagesWide;
-@property (assign) NSSize pageSize;
+@property (assign) NSSize paperSize;
 @property (assign) CGFloat dotSize;
 @property (retain) NSDictionary *labelAttributes;
 

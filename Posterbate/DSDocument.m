@@ -10,57 +10,73 @@
 
 @implementation DSDocument
 
+@synthesize image;
+@synthesize dotSize;
 @synthesize halftoneView;
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
-        // Add your subclass-specific initialization here.
-        // If an error occurs here, return nil.
+    if (self = [super init]) {
+        self.dotSize = 30.0;
+        self.image = nil;
     }
+    
     return self;
 }
 
 - (NSString *)windowNibName
 {
-    // Override returning the nib file name of the document
-    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
     return @"DSDocument";
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
-    // Add any code here that needs to be executed once the windowController has loaded the document's window.
+
+    [self.halftoneView bind:@"dotSize" toObject:self withKeyPath:@"dotSize" options:nil];
+    [self.halftoneView bind:@"paperSize" toObject:self withKeyPath:@"printInfo.paperSize" options:nil];
+    
+    [self.halftoneView bind:@"image" toObject:self withKeyPath:@"image" options:nil];
+    [self bind:@"image" toObject:self.halftoneView withKeyPath:@"image" options:nil];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
-    /*
-     Insert code here to write your document to data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning nil.
-    You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
-    */
-    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-    @throw exception;
+    if ([typeName isEqualToString:@"PosterbateDocumentType"]) {
+        return [NSKeyedArchiver archivedDataWithRootObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:[self.image TIFFRepresentationUsingCompression:NSTIFFCompressionPackBits factor:1], @"imageData", [NSNumber numberWithFloat:self.dotSize], @"dotSize", [NSNumber numberWithFloat:self.printInfo.paperSize.width], @"paperWidth", [NSNumber numberWithFloat:self.printInfo.paperSize.height], @"paperHeight", self.printInfo.paperName, @"paperName", nil]];
+    }
+    
     return nil;
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
 {
-    /*
-    Insert code here to read your document from the given data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning NO.
-    You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead.
-    If you override either of these, you should also override -isEntireFileLoaded to return NO if the contents are lazily loaded.
-    */
-    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-    @throw exception;
-    return YES;
+    if ([typeName isEqualToString:@"PosterbateDocumentType"]) {
+        NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        self.image = [[NSImage alloc] initWithData:[dict objectForKey:@"imageData"]];
+        self.dotSize = [[dict objectForKey:@"dotSize"] floatValue];
+        self.printInfo.paperSize = NSMakeSize([[dict objectForKey:@"paperWidth"] floatValue], [[dict objectForKey:@"paperWidth"] floatValue]);
+        self.printInfo.paperName = [dict objectForKey:@"paperName"];
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 + (BOOL)autosavesInPlace
 {
     return YES;
+}
+
+- (BOOL)shouldChangePrintInfo:(NSPrintInfo *)newPrintInfo
+{
+    [self willChangeValueForKey:@"printInfo.paperSize"];
+    BOOL val = [super shouldChangePrintInfo:newPrintInfo];
+    [self didChangeValueForKey:@"printInfo.paperSize"];
+    
+    return val;
 }
 
 - (void)printDocument:(id)sender

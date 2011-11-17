@@ -12,6 +12,8 @@
 
 @interface DSDocument : NSDocument
 
+@property (retain) NSImage *image;
+@property (assign) CGFloat dotSize;
 @property (retain) IBOutlet DSHalftonePrintView *halftoneView;
 
 @end
