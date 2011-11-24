@@ -1,6 +1,6 @@
 //
 //  DSHalftonePrintView.h
-//  Posterbate
+//  HalfTime
 //
 //  Created by David Selassie on 11/11/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
@@ -14,6 +14,7 @@
 @property (readonly) NSInteger pagesHigh;
 @property (readonly) NSInteger pagesWide;
 @property (assign) NSSize paperSize;
+@property (readwrite) NSRect pageBounds;
 @property (assign) CGFloat dotSize;
 @property (retain) NSDictionary *labelAttributes;
 

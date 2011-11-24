@@ -1,6 +1,6 @@
 //
 //  DSDocument.m
-//  Posterbate
+//  HalfTime
 //
 //  Created by David Selassie on 11/14/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
@@ -34,7 +34,8 @@
     [super windowControllerDidLoadNib:aController];
 
     [self.halftoneView bind:@"dotSize" toObject:self withKeyPath:@"dotSize" options:nil];
-    [self.halftoneView bind:@"paperSize" toObject:self withKeyPath:@"printInfo.paperSize" options:nil];
+    [self.halftoneView bind:@"pageBounds" toObject:self withKeyPath:@"printInfo.imageablePageBounds" options:nil];
+    //[self.halftoneView bind:@"paperSize" toObject:self withKeyPath:@"printInfo.paperSize" options:nil];
     
     [self.halftoneView bind:@"image" toObject:self withKeyPath:@"image" options:nil];
     [self bind:@"image" toObject:self.halftoneView withKeyPath:@"image" options:nil];
@@ -42,8 +43,8 @@
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
-    if ([typeName isEqualToString:@"PosterbateDocumentType"]) {
-        return [NSKeyedArchiver archivedDataWithRootObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:[self.image TIFFRepresentationUsingCompression:NSTIFFCompressionPackBits factor:1], @"imageData", [NSNumber numberWithFloat:self.dotSize], @"dotSize", [NSNumber numberWithFloat:self.printInfo.paperSize.width], @"paperWidth", [NSNumber numberWithFloat:self.printInfo.paperSize.height], @"paperHeight", self.printInfo.paperName, @"paperName", nil]];
+    if ([typeName isEqualToString:@"HalfTimeDocumentType"]) {
+        return [NSKeyedArchiver archivedDataWithRootObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:[self.image TIFFRepresentationUsingCompression:NSTIFFCompressionLZW factor:1], @"imageData", [NSNumber numberWithFloat:self.dotSize], @"dotSize", [NSValue valueWithRect:self.printInfo.imageablePageBounds], @"paperPrintableRect", self.printInfo.paperName, @"paperName", [NSValue valueWithRect:self.windowForSheet.frame], @"windowFrame", [NSValue valueWithRect:self.halftoneView.bounds], @"halftoneBounds", nil]];
     }
     
     return nil;
@@ -51,13 +52,14 @@
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
 {
-    if ([typeName isEqualToString:@"PosterbateDocumentType"]) {
+    if ([typeName isEqualToString:@"HalfTimeDocumentType"]) {
         NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
-        self.image = [[NSImage alloc] initWithData:[dict objectForKey:@"imageData"]];
         self.dotSize = [[dict objectForKey:@"dotSize"] floatValue];
-        self.printInfo.paperSize = NSMakeSize([[dict objectForKey:@"paperWidth"] floatValue], [[dict objectForKey:@"paperWidth"] floatValue]);
         self.printInfo.paperName = [dict objectForKey:@"paperName"];
+        self.image = [[NSImage alloc] initWithData:[dict objectForKey:@"imageData"]];
+        //[self.windowForSheet setFrame:[[dict objectForKey:@"windowFrame"] rectValue] display:YES animate:YES];
+        [self.halftoneView setBounds:[[dict objectForKey:@"halftoneBounds"] rectValue]];
         
         return YES;
     }
@@ -70,14 +72,14 @@
     return YES;
 }
 
-- (BOOL)shouldChangePrintInfo:(NSPrintInfo *)newPrintInfo
+/*- (BOOL)shouldChangePrintInfo:(NSPrintInfo *)newPrintInfo
 {
     [self willChangeValueForKey:@"printInfo.paperSize"];
     BOOL val = [super shouldChangePrintInfo:newPrintInfo];
     [self didChangeValueForKey:@"printInfo.paperSize"];
     
     return val;
-}
+}*/
 
 - (void)printDocument:(id)sender
 {

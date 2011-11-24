@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'Posterbate' target in the 'Posterbate' project
-//
-
-#ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-#endif

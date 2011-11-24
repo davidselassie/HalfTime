@@ -9,12 +9,12 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>posterbate</string>
+				<string>halftime</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string></string>
 			<key>CFBundleTypeName</key>
-			<string>PosterbateDocumentType</string>
+			<string>HalfTimeDocumentType</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>????</string>

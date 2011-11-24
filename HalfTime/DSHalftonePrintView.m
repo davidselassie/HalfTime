@@ -1,6 +1,6 @@
 //
 //  DSHalftonePrintView.m
-//  Posterbate
+//  HalfTime
 //
 //  Created by David Selassie on 11/11/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
@@ -51,9 +51,19 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
 @synthesize dotSize;
 @synthesize labelAttributes;
 
+- (void)setPageBounds:(NSRect)pageBounds
+{
+    self.paperSize = pageBounds.size;
+}
+
+- (NSRect)pageBounds
+{
+    return NSMakeZeroRectFromSize(self.paperSize);
+}
+
 - (BOOL)isFlipped
 {
-    return TRUE;
+    return YES;
 }
 
 - (void)setImage:(NSImage *)newImage
@@ -76,8 +86,7 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
         
         [self addObserver:self forKeyPath:@"dotSize" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
         [self addObserver:self forKeyPath:@"paperSize" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
-                
-        [self scaleUnitSquareToSize:NSMakeSize(0.5, 0.5)];
+        
         //[NSBezierPath setDefaultFlatness:100.0];
     }
     
@@ -89,7 +98,7 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
     range->location = 1;
     range->length = self.pagesHigh * self.pagesWide;
     
-    return TRUE;
+    return YES;
 }
 
 - (NSRect)rectForPage:(NSInteger)page
@@ -135,6 +144,13 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    if ([NSGraphicsContext currentContextDrawingToScreen]) {
+        //[self scaleUnitSquareToSize:NSMakeSize(0.5, 0.5)];
+    }
+    else {
+        //[self scaleUnitSquareToSize:NSMakeSize(1, 1)];
+    }
+    
     if (self.pixelatedImageRep) {
         // Raw image scaling:
         //[self.image drawInRect:self.bounds fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
@@ -157,8 +173,8 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
         [outNS drawInRect:self.bounds fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];*/
         
         [[NSColor blackColor] set];
-        for (CGFloat dotX = dirtyRect.origin.x; dotX <= dirtyRect.origin.x + dirtyRect.size.width; dotX += dotSize) {
-            for (CGFloat dotY = dirtyRect.origin.y; dotY <= dirtyRect.origin.y + dirtyRect.size.height; dotY += dotSize) {
+        for (CGFloat dotX = floor(dirtyRect.origin.x / dotSize) * dotSize; dotX <= dirtyRect.origin.x + dirtyRect.size.width; dotX += dotSize) {
+            for (CGFloat dotY = floor(dirtyRect.origin.y / dotSize) * dotSize; dotY <= dirtyRect.origin.y + dirtyRect.size.height; dotY += dotSize) {
                 NSRect fullDotRect = NSMakeRect(dotX, dotY, dotSize, dotSize);
                 
                 CGFloat black = 1.0 - [pixelatedImageRep colorAtX:dotX / dotSize y:dotY / dotSize].brightnessComponent;
@@ -204,7 +220,7 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
 
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender
 {
-    return TRUE;
+    return YES;
 }
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
@@ -225,14 +241,14 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
     NSArray *fileArray = [board propertyListForType:NSFilenamesPboardType];
     
     if (!fileArray) {
-        return FALSE;
+        return NO;
     }
     
     NSString *path = [fileArray objectAtIndex:0];
     
     self.image = [[NSImage alloc] initWithContentsOfFile:path];
     
-    return TRUE;
+    return YES;
 }
 
 - (void)concludeDragOperation:(id <NSDraggingInfo>)sender
