@@ -16,6 +16,7 @@
 @property (assign) NSSize paperSize;
 @property (readwrite) NSRect pageBounds;
 @property (assign) CGFloat dotSize;
+@property (assign) CGFloat zoom;
 @property (retain) NSDictionary *labelAttributes;
 
 @end

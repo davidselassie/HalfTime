@@ -49,6 +49,7 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
 @synthesize pixelatedImageRep;
 @synthesize paperSize;
 @synthesize dotSize;
+@synthesize zoom;
 @synthesize labelAttributes;
 
 - (void)setPageBounds:(NSRect)pageBounds
@@ -82,9 +83,13 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
 - (id)initWithFrame:(NSRect)frameRect
 {
     if (self = [super initWithFrame:frameRect]) {
-        self.labelAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica Neue" size:36], NSFontAttributeName, [NSColor grayColor], NSForegroundColorAttributeName, nil];
+        self.labelAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica Neue" size:36], NSFontAttributeName, [NSColor colorWithDeviceRed:70.0/255.0 green:130.0/255.0 blue:180.0/255.0 alpha:1], NSForegroundColorAttributeName, nil];
+        
+        self.dotSize = 20.0;
+        self.zoom = 1.0;
         
         [self addObserver:self forKeyPath:@"dotSize" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
+        [self addObserver:self forKeyPath:@"zoom" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
         [self addObserver:self forKeyPath:@"paperSize" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
         
         //[NSBezierPath setDefaultFlatness:100.0];
@@ -213,6 +218,10 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
         
         // Draw page count in corner.
         [[NSString stringWithFormat:@"%i x %i", self.pagesWide, self.pagesHigh] drawAtPoint:NSMakePoint(20, 10) withAttributes:labelAttributes];
+        
+        if (!self.pixelatedImageRep) {
+            [[NSString stringWithFormat:@"Drop an image here.", self.pagesWide, self.pagesHigh] drawAtPoint:NSMakePoint(20, 60) withAttributes:labelAttributes];
+        }
     } else {
 
     }
@@ -259,6 +268,15 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (object == self) {
+        if ([keyPath isEqualToString:@"dotSize"]) {
+            [self setFrameSize:self.frame.size];
+        }
+        if ([keyPath isEqualToString:@"zoom"]) {
+            self.bounds = self.frame;
+            [self scaleUnitSquareToSize:NSMakeSize(self.zoom, self.zoom)];
+            [self setFrameSize:self.frame.size];
+        }
+        
         [self setNeedsDisplay];
     }
 }

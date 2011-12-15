@@ -14,6 +14,15 @@
 
 @property (retain) NSImage *image;
 @property (assign) CGFloat dotSize;
+@property (assign) CGFloat zoom;
+@property (assign) NSRect imageFrame;
 @property (retain) IBOutlet DSHalftonePrintView *halftoneView;
+@property (retain) IBOutlet NSWindow *halftoneWindow;
+
+- (IBAction)decreaseDotSize:(id)sender;
+- (IBAction)increaseDotSize:(id)sender;
+
+- (IBAction)zoomOut:(id)sender;
+- (IBAction)zoomIn:(id)sender;
 
 @end
