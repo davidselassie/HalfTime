@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A119DEA11499D0AF00967CE1 /* GenericApplicationIconHalftone.icns in Resources */ = {isa = PBXBuildFile; fileRef = A119DEA01499D0AF00967CE1 /* GenericApplicationIconHalftone.icns */; };
 		A1E5EB0C147245CE005C0151 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E5EB0B147245CE005C0151 /* Cocoa.framework */; };
 		A1E5EB16147245CE005C0151 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1E5EB14147245CE005C0151 /* InfoPlist.strings */; };
 		A1E5EB18147245CE005C0151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E5EB17147245CE005C0151 /* main.m */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A119DEA01499D0AF00967CE1 /* GenericApplicationIconHalftone.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = GenericApplicationIconHalftone.icns; sourceTree = "<group>"; };
 		A1E5EB07147245CE005C0151 /* HalfTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HalfTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E5EB0B147245CE005C0151 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A1E5EB0E147245CE005C0151 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -105,6 +107,7 @@
 		A1E5EB12147245CE005C0151 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A119DEA01499D0AF00967CE1 /* GenericApplicationIconHalftone.icns */,
 				A1E5EB13147245CE005C0151 /* HalfTime-Info.plist */,
 				A1E5EB14147245CE005C0151 /* InfoPlist.strings */,
 				A1E5EB17147245CE005C0151 /* main.m */,
@@ -168,6 +171,7 @@
 				A1E5EB1C147245CE005C0151 /* Credits.rtf in Resources */,
 				A1E5EB22147245CE005C0151 /* DSDocument.xib in Resources */,
 				A1E5EB25147245CF005C0151 /* MainMenu.xib in Resources */,
+				A119DEA11499D0AF00967CE1 /* GenericApplicationIconHalftone.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -206,22 +206,37 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
     if ([NSGraphicsContext currentContextDrawingToScreen]) {
         // Draw page outlines.
         [[NSColor grayColor] set];
+        [NSBezierPath setDefaultLineWidth:1.0 / self.zoom];
+        
         for (NSInteger xPage = 0; xPage < self.pagesWide; xPage++) {
             for (NSInteger yPage = 0; yPage < self.pagesHigh; yPage++) {
                 NSRect pageRect = NSMakeRect(xPage * paperSize.width, yPage * paperSize.height, paperSize.width, paperSize.height);
 
                 if (NSIntersectsRect(dirtyRect, pageRect)) {
-                    NSFrameRect(pageRect);
+                    //NSFrameRect(pageRect);
+                    [NSBezierPath strokeRect:pageRect];
                 }
             }
         }
         
+        NSInteger actualPagesWide = self.pagesWide, actualPagesHigh = self.pagesHigh;
+        
+        // Reset scale just for drawing text.
+        self.bounds = self.frame;
+        [self scaleUnitSquareToSize:NSMakeSize(1.0, 1.0)];
+        
         // Draw page count in corner.
-        [[NSString stringWithFormat:@"%i x %i", self.pagesWide, self.pagesHigh] drawAtPoint:NSMakePoint(20, 10) withAttributes:labelAttributes];
+        [[NSString stringWithFormat:@"%i x %i sheets", actualPagesWide, actualPagesHigh] drawAtPoint:NSMakePoint(20, 10) withAttributes:labelAttributes];
         
         if (!self.pixelatedImageRep) {
-            [[NSString stringWithFormat:@"Drop an image here.", self.pagesWide, self.pagesHigh] drawAtPoint:NSMakePoint(20, 60) withAttributes:labelAttributes];
+            [[NSString stringWithFormat:@"Drop an image here.", actualPagesWide, actualPagesHigh] drawAtPoint:NSMakePoint(20, 60) withAttributes:labelAttributes];
+            [[NSString stringWithFormat:@"Resize the window.", actualPagesWide, actualPagesHigh] drawAtPoint:NSMakePoint(20, 110) withAttributes:labelAttributes];
         }
+        
+        // Set the scale back.
+        self.bounds = self.frame;
+        [self scaleUnitSquareToSize:NSMakeSize(self.zoom, self.zoom)];
+        
     } else {
 
     }
@@ -269,6 +284,7 @@ NSRect NSCenterRectInRect(NSRect frame, CGFloat radius)
 {
     if (object == self) {
         if ([keyPath isEqualToString:@"dotSize"]) {
+            // Forces recalculation of the pixelated image.
             [self setFrameSize:self.frame.size];
         }
         if ([keyPath isEqualToString:@"zoom"]) {
